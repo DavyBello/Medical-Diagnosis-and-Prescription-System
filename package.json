@@ -1,0 +1,27 @@
+{
+  "name": "MDPS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mainstream <bellooladipupo41@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "8.9.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "material-ui": "^0.19.4",
+    "next": "^4.2.1",
+    "react": "^16.1.1",
+    "react-bootstrap": "^0.31.5",
+    "react-dom": "^16.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "dev": "nodemon index.js",
+    "build": "next build",
+    "heroku-postbuild": "next build",
+    "start": "NODE_ENV=production node server.js"
+  }
+}
