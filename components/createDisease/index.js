@@ -9,7 +9,10 @@ import MenuItem from 'material-ui/MenuItem'
 import Checkbox from 'material-ui/Checkbox'
 import {Row, Col} from 'react-bootstrap'
 
-let symptoms = [];
+import diseasesDB from '../../data/diseases.js'
+
+let symptoms = [],
+    disease = {};
 
 export default class extends React.Component {
   constructor(props) {
@@ -19,6 +22,7 @@ export default class extends React.Component {
     })
 
     this.state = {
+      disease: disease,
       values: [],
       symptoms: symptoms,
     };
@@ -29,19 +33,6 @@ export default class extends React.Component {
     symptoms[index].checked = !symptoms[index].checked;
     this.setState((oldState) => ({symptoms: symptoms}));
   }
-
-  resetValues() {
-    this.props.symptoms.map((symptom, index) => {
-      symptoms[index] = {id: symptom.id,name: symptom.name,checked: false};
-    })
-    this.setState((prevState)=>({
-      value: 0,
-      patient: {},
-      symptoms: symptoms
-    }));
-  }
-
-  handleChange = (event, index, values) => this.setState({values});
 
   selectionRenderer = (values) => {
     switch (values.length) {
@@ -66,10 +57,51 @@ export default class extends React.Component {
     ));
   }
 
+  resetValues() {
+    console.log('Resetting Values');
+    this.props.symptoms.map((symptom, index) => {
+      symptoms[index] = {id: symptom.id,name: symptom.name,checked: false};
+    })
+    disease = {};
+    this.setState((prevState)=>({
+      disease: {},
+      patient: {},
+      symptoms: symptoms
+    }));
+  }
+
+  updateField = (field, value) => {
+    disease[field] = value;
+    this.setState({disease: disease});
+  }
+
+  addDisease = () => {
+    let selectedSymptoms = [];
+    this.state.symptoms.forEach((symptom)=>{
+      symptom.checked && selectedSymptoms.push(symptom.id)
+    })
+    console.log('Adding Disease');
+    disease = this.state.disease;
+    if (disease) {
+      diseasesDB.push({
+        id: (diseasesDB.length + 1),
+        title: disease.title,
+        description: disease.description,
+        causes: disease.causes,
+        remedy: disease.remedy,
+        dosage: disease.dosage,
+        symptomsIds: selectedSymptoms
+      })
+      resetValues();
+    }
+    /*console.log(this.state.disease);
+    console.log(selectedSymptoms);*/
+  }
+
   render() {
     const style = {
       cardStyle: {
-        width: '90%',
+        width: '50%',
         margin: '10px auto'
       }
     }
@@ -88,9 +120,18 @@ export default class extends React.Component {
           padding: '20px',
           paddingBottom: '40px'
         }}>
-          <TextField floatingLabelText="Title" id='name' fullWidth={true}/><br/>
-          <TextField floatingLabelText="Description" id='description' fullWidth={true}/><br/>
-          <TextField floatingLabelText="Causes" id='description' fullWidth={true}/><br/>
+          <TextField floatingLabelText="Title" id='name' fullWidth={true}
+            value={(this.state.disease.title)? this.state.disease.title : ""}
+            onChange={(event)=>this.updateField('title', event.target.value)}
+          /><br/>
+          <TextField floatingLabelText="Description"  fullWidth={true}
+            value={(this.state.disease.description)? this.state.disease.description : ""}
+            onChange={(event)=>this.updateField('description', event.target.value)}
+          /><br/>
+          <TextField floatingLabelText="Causes"  fullWidth={true}
+            value={(this.state.disease.causes)? this.state.disease.causes : ""}
+            onChange={(event)=>this.updateField('causes', event.target.value)}
+          /><br/>
           <br/>
           <h5>Select Symptoms</h5>
           <br/>
@@ -108,12 +149,22 @@ export default class extends React.Component {
               ))
             }
           </Row>
-          <TextField floatingLabelText="Remedy" id='description' fullWidth={true}/><br/>
-          <TextField floatingLabelText="Required Dosage" id='description' fullWidth={true}/><br/>
+          <TextField floatingLabelText="Remedy"  fullWidth={true}
+            value={(this.state.disease.remedy)? this.state.disease.remedy : ""}
+            onChange={(event)=>this.updateField('remedy', event.target.value)}
+          /><br/>
+          <TextField floatingLabelText="Required Dosage"  fullWidth={true}
+            value={(this.state.disease.dosage)? this.state.disease.dosage : ""}
+            onChange={(event)=>this.updateField('dosage', event.target.value)}
+          /><br/>
           <br/>
           <hr/>
-          <RaisedButton label="Add Disease" primary={true}/>
-          <RaisedButton style={{float: 'right'}} label="Reset" backgroundColor={'#ff0000de'} labelColor={'#ffffff'}/>
+          <RaisedButton label="Add Disease" primary={true} onClick={()=>this.addDisease()}/>
+          <RaisedButton style={{float: 'right'}}
+            label="Reset"
+            backgroundColor={'#ff0000de'}
+            labelColor={'#ffffff'}
+            onClick={()=>this.resetValues()}/>
           <br/>
         </div>
       </Card>

@@ -47,4 +47,28 @@ export default [
     id: '12',
     name: 'Sore Throat'
   },
+  {
+    id: '13',
+    name: 'Seizures'
+  },
+  {
+    id: '14',
+    name: 'Rash'
+  },
+  {
+    id: '15',
+    name: 'Weakness'
+  },
+  {
+    id: '16',
+    name: 'Dehydration'
+  },
+  {
+    id: '17',
+    name: 'Chills'
+  },
+  {
+    id: '18',
+    name: 'Joint pain'
+  },
 ]

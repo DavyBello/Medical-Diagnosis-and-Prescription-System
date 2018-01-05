@@ -19,6 +19,10 @@ export default class extends React.Component {
   render() {
     return (
       <Drawer docked={false} width={200} open={this.state.open} onRequestChange={(open) => this.setState({open: false})}>
+        <Link href="/homepage" prefetch>
+          <MenuItem onTouchTap={this.handleClose}>Home </MenuItem>
+        </Link>
+        <Divider />
         <Link href="/diagnosis" prefetch>
           <MenuItem onTouchTap={this.handleClose}>Diagnosis</MenuItem>
         </Link>

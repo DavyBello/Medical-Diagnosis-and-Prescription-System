@@ -3,36 +3,30 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField'
+import Checkbox from 'material-ui/Checkbox'
 import {Row, Col} from 'react-bootstrap'
-/**
- * Dialog content can be scrollable.
- */
+
 export default class extends React.Component {
 
   constructor(props) {
+    console.log(props);
     super(props)
-    props.symptoms.map((symptom, index) => {
-      symptoms[index] = {id: symptom.id,name: symptom.name,checked: false};
-    })
 
     this.state = {
       patient: {},
-      symptoms: props.symptoms,
     }
   }
 
-  updateCheck(index) {
-    //update symptoms array - set state.symptoms to updated array
-    symptoms[index].checked = !symptoms[index].checked;
-    this.setState((oldState) => ({symptoms: symptoms}));
-  }
-
-  render() {
-    console.log(this.props);
-
+  render() {  
+    let patient = this.props.patient || {}
     const actions = [
       <FlatButton
         label="Save"
+        primary={true}
+        onClick={this.props.handleClose}
+      />,
+      <FlatButton
+        label="Reset"
         primary={true}
         onClick={this.props.handleClose}
       />,
@@ -46,32 +40,35 @@ export default class extends React.Component {
 
     return (
         <Dialog
-          title="Patient Details"
+          title="Patient details"
           actions={actions}
           modal={false}
-          open={this.props.showDiseaseDialog}
+          open={this.props.showPatientDialog}
           onRequestClose={this.props.handleClose}
           autoScrollBodyContent={true}
-          contentStyle={{minWidth: '70%'}}
+          contentStyle={{minWidth: '70%',minHeight: '70%'}}
         >
           <Row>
             <Col md={4}>
-              Name : <TextField disabled={true} value={this.props.disease.fullName}/>
+              ID : <TextField disabled={true} value={' '+patient.id}/>
             </Col>
             <Col md={4}>
-              Age : <TextField disabled={true} value={this.props.disease.age}/>
+              Name  : <TextField disabled={true} value={patient.fullName}/>
             </Col>
             <Col md={4}>
-              Phone No. : <TextField disabled={true} value={this.props.disease.phone}/>
+              Sex : <TextField disabled={true} value={patient.sex}/>
             </Col>
             <Col md={4}>
-              Sex : <TextField disabled={true} value={this.props.disease.sex}/>
+              Phone no. : <TextField disabled={true} value={patient.phone}/>
             </Col>
             <Col md={4}>
-              Marital Status : <TextField disabled={true} value={this.props.disease.maritalStatus}/>
+              Age : <TextField disabled={true} value={patient.age}/>
             </Col>
             <Col md={4}>
-              Occupation : <TextField disabled={true} value={this.props.disease.Occupation}/>
+              Date Of Birth : <TextField disabled={true} value={patient.dateOfBirth}/>
+            </Col>
+            <Col md={4}>
+              Marital Status : <TextField disabled={true} value={patient.maritalStatus}/>
             </Col>
           </Row>
         </Dialog>

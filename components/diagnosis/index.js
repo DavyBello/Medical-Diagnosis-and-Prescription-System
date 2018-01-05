@@ -75,7 +75,7 @@ export default class extends React.Component {
     //console.log(this.state);
     const style = {
       cardStyle: {
-        width: '90%',
+        width: '70%',
         margin: '10px auto'
       }
     }

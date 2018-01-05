@@ -52,12 +52,13 @@ export default class extends React.Component {
   render() {
     const style = {
       cardStyle: {
-        width: '90%',
+        width: '70%',
         margin: '10px auto'
       }
     }
     const styles = {
-      TableRowColumnIdWidth: '10px'
+      TableRowColumnIdWidth: '10px',
+      TableRowColumnTitleWidth: '140px'
     }
     //console.log(this.props);
     return (
@@ -82,17 +83,15 @@ export default class extends React.Component {
               <TableHeaderColumn>Title</TableHeaderColumn>
               <TableHeaderColumn>Description</TableHeaderColumn>
               <TableHeaderColumn>Causes</TableHeaderColumn>
-              <TableHeaderColumn>Symptoms</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody deselectOnClickaway={false}>
             {this.props.diseases.map((disease, index)=>(
               <TableRow selected={this.isSelected(index)}>
-                <TableRowColumn style={{width: styles.TableRowColumnIdWidth}}>1</TableRowColumn>
-                <TableRowColumn>{disease.title}</TableRowColumn>
+                <TableRowColumn style={{width: styles.TableRowColumnIdWidth}}>{index+1}</TableRowColumn>
+                <TableRowColumn style={{width: styles.TableRowColumnTitleWidth}}>{disease.title}</TableRowColumn>
                 <TableRowColumn>{disease.description}</TableRowColumn>
                 <TableRowColumn>{disease.causes}</TableRowColumn>
-                <TableRowColumn>{disease.title}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>

@@ -21,7 +21,7 @@ export default class extends React.Component {
   render() {
     const style = {
       cardStyle: {
-        width: '90%',
+        width: '50%',
         margin: '10px auto'
       }
     }

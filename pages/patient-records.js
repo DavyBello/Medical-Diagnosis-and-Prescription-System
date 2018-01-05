@@ -3,9 +3,7 @@ import React from 'react'
 import PatientRecords from '../components/patientRecords/index'
 import withApp from '../components/withApp'
 
-/*import users from '../data/users.js'
-import issues from '../data/issues.js'
-import comments from '../data/comments.js'*/
+import patients from '../data/patients.js'
 
 class PatientRecordsPage extends React.Component {
   constructor(props, context) {
@@ -13,14 +11,13 @@ class PatientRecordsPage extends React.Component {
 
     this.state = {
       open: false,
-      store: {
-      }
+      patients: patients
     }
   }
 
   render() {
     return (
-      <PatientRecords />
+      <PatientRecords patients={this.state.patients}/>
     )
   }
 }

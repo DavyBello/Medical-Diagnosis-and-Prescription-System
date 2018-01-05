@@ -88,16 +88,16 @@ export default class extends React.Component {
               Title : <TextField disabled={true} value={disease.title}/>
             </Col>
             <Col md={4}>
-              Description : <TextField disabled={true} value={disease.description}/>
+              Description : <TextField disabled={true} multiLine={true} rows={2} value={disease.description}/>
             </Col>
             <Col md={4}>
-              Causes : <TextField disabled={true} value={disease.causes}/>
+              Causes : <TextField disabled={true} multiLine={true} rows={2} value={disease.causes}/>
             </Col>
             <Col md={4}>
-              Remedy : <TextField disabled={true} value={disease.remedy}/>
+              Remedy : <TextField disabled={true} multiLine={true} rows={2} value={disease.remedy}/>
             </Col>
             <Col md={4}>
-              Dosage : <TextField disabled={true} value={disease.dosage}/>
+              Dosage : <TextField disabled={true} multiLine={true} rows={2} value={disease.dosage}/>
             </Col>
           </Row>
           <h4>Symptoms</h4>

@@ -22,7 +22,13 @@ export default class extends React.Component {
     return (
       <Grid>
         <Row>
-          <Col xs={12} md={12}>
+          <Col xs={12} md={12}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '10vh',
+            }}>
             <Card style={style.cardStyle}>
               <CardTitle title="Welcome Back"/>
               <div style={{
